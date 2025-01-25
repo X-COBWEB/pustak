@@ -10,13 +10,16 @@ const Navbar = async () => {
     <header className='px-5 py-3 bg-white shadow-sm font-work-sans text-black'>
       <nav className='flex justify-between items-center'>
         <Link href='/'>
-          <Image src='/logo.png' alt='logo' width={100} height={50} />
+          <Image src='/pustak.png' alt='logo' width={100} height={50} />
         </Link>
         <div className='flex items-center gap-5'>
           {session && session?.user?(
             <>
-              <Link href="/startup/create">
-                <span>Create</span>
+            <Link href="/book/recieve">
+                <span>Recieve Books</span>
+              </Link>
+              <Link href="/book/donate">
+                <span>Donate Books</span>
               </Link>
               <form action={async()=>{
                 "use server"

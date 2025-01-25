@@ -1,0 +1,216 @@
+{
+  "main": {
+    "id": "5780689ccad3d53b",
+    "type": "split",
+    "children": [
+      {
+        "id": "0906a275e5d6e518",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8850aae317a1bff5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "268c106bf00bc198",
+    "type": "split",
+    "children": [
+      {
+        "id": "815193e2f1a03df5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "93f206817da00da8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "92872210c808e6a4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "40debd8b98649f1d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 285.5
+  },
+  "right": {
+    "id": "a417db9326aff224",
+    "type": "split",
+    "children": [
+      {
+        "id": "a79dcd1eccae76e3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c486f1b4fc0083b0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Notes/Java Script/Sync and Asynchronous programming or Functions.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Sync and Asynchronous programming or Functions"
+            }
+          },
+          {
+            "id": "e26069985c9604fe",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Notes/Java Script/Sync and Asynchronous programming or Functions.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Sync and Asynchronous programming or Functions"
+            }
+          },
+          {
+            "id": "e8c3907bf0e1ef8d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c573792d0883b972",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Notes/Java Script/Asynchronous and Synchronous/05. Built-in Modules of Nodejs.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 05. Built-in Modules of Nodejs"
+            }
+          },
+          {
+            "id": "b8002d94cd90ffc9",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 301.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "8850aae317a1bff5",
+  "lastOpenFiles": [
+    "Meow.png",
+    "README.md",
+    "Second-Api-Express/Second-Api-Express-notes.md",
+    "Second-Api-Express/Middleware.md",
+    "Notes/Java Script/Asynchronous and Synchronous/04. Promises.md",
+    "First-Api/First-api-notes.md",
+    "Second-Api-Express/node_modules/fsevents",
+    "Second-Api-Express/node_modules/side-channel/test/index.js",
+    "Second-Api-Express/node_modules/side-channel/tsconfig.json",
+    "Second-Api-Express/node_modules/side-channel/README.md",
+    "Second-Api-Express/node_modules/side-channel/LICENSE",
+    "Second-Api-Express/node_modules/side-channel/test",
+    "Second-Api-Express/node_modules/side-channel/package.json",
+    "Second-Api-Express/node_modules/side-channel/index.js",
+    "Second-Api-Express/node_modules/side-channel/index.d.ts",
+    "Second-Api-Express/node_modules/side-channel/CHANGELOG.md",
+    "Second-Api-Express/node_modules/side-channel",
+    "Second-Api-Express/node_modules/express/Readme.md",
+    "Second-Api-Express/node_modules/finalhandler/node_modules/debug/src/node.js",
+    "Second-Api-Express/node_modules/finalhandler/node_modules/debug/CHANGELOG.md",
+    "Second-Api-Express/node_modules/express/History.md",
+    "Second-Api-Express/node_modules/content-disposition/README.md",
+    "Second-Api-Express/node_modules/send/node_modules/encodeurl/HISTORY.md",
+    "Second-Api-Express/node_modules/express/node_modules/ms/readme.md",
+    "Second-Api-Express/node_modules/body-parser/node_modules/ms/license.md",
+    "Second-Api-Express/node_modules/send/node_modules/debug/node_modules/ms/readme.md",
+    "Second-Api-Express/node_modules/finalhandler/node_modules/ms/readme.md",
+    "Second-Api-Express/node_modules/send/node_modules/debug/README.md",
+    "Second-Api-Express/node_modules/finalhandler/node_modules/debug/README.md",
+    "Second-Api-Express/node_modules/send/node_modules/debug/node_modules/ms/license.md",
+    "Second-Api-Express/node_modules/finalhandler/node_modules/ms/license.md",
+    "Second-Api-Express/node_modules/content-type/README.md",
+    "Second-Api-Express/node_modules/content-type/HISTORY.md",
+    "Second-Api-Express/node_modules/array-flatten/README.md",
+    "Second-Api-Express/node_modules/accepts/README.md",
+    "Second-Api-Express/node_modules/accepts/HISTORY.md",
+    "Pasted image 20250122085405.png",
+    "Notes/Server's-Working.canvas"
+  ]
+}

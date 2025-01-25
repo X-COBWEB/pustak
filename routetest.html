@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baato Map with Geolocation and Donor Location</title>
+
+    <!-- Baato Mapbox library -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #map-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        #fetch-donor-btn, #show-route-btn {
+            position: absolute;
+            top: 10px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+        #fetch-donor-btn {
+            left: 10px;
+        }
+        #show-route-btn {
+            left: 150px;
+        }
+        #fetch-donor-btn:hover, #show-route-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Baato Map with Geolocation and Donor Location</h1>
+    <div id="map-container"></div>
+    <button id="fetch-donor-btn">Fetch Donor Location</button>
+    <button id="show-route-btn">Show the Route</button>
+
+    <script>
+        // Initialize the Baato map with a default location (Kathmandu, Nepal)
+        var map = new mapboxgl.Map({
+            container: 'map-container', // The ID of the HTML container where the map will be displayed
+            style: 'https://api.baato.io/api/v1/styles/breeze?key=bpk.zFs9QOONFAZgtBtlDG7U2-8bFRboO0Yn2hEqh8p867Ti', // Baato style URL
+            center: [85.31853583740946, 27.701739466949107], // Center at a default position (Kathmandu)
+            zoom: 14 // Zoom level
+        });
+
+        var userLocation = null; // Store user's location for route calculation
+        var donorLocation = null; // Store donor's location for route calculation
+
+        // Function to get the user's location and update the map
+        function getLocation() {
+            if (navigator.geolocation) {
+                // Get the current position of the user
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    // Log the latitude and longitude to the console
+                    console.log(`User Location: Latitude: ${latitude}, Longitude: ${longitude}`);
+
+                    // Update the map to the user's location
+                    map.flyTo({
+                        center: [longitude, latitude], // Move the map center to the user's location
+                        zoom: 14, // Zoom level
+                        essential: true // Make the movement essential (smooth)
+                    });
+
+                    // Add a marker for the user's location
+                    new mapboxgl.Marker()
+                        .setLngLat([longitude, latitude])
+                        .addTo(map);
+
+                    // Store user location for route calculation
+                    userLocation = { latitude, longitude };
+                }, function(error) {
+                    console.error("Error:", error.message);
+                    alert("Error: " + error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Simulate fetching donor data (this should be replaced with actual API call)
+        const fetchDonorData = () => {
+            // Simulating data from Sanity Database
+            return {
+                donorName: 'John Doe',
+                latitude: 27.7015, // Latitude of the donor's location (Kathmandu)
+                longitude: 85.3200, // Longitude of the donor's location (Kathmandu)
+            };
+        };
+
+        // Function to add donor's marker on the map
+        const addDonorLocation = (latitude, longitude) => {
+            // Add a marker for the donor's location (using the fetched data)
+            new mapboxgl.Marker({ color: 'red' })
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+
+            // Store donor location for route calculation
+            donorLocation = { latitude, longitude };
+
+            // Center the map on the donor's location
+            map.flyTo({
+                center: [longitude, latitude],
+                zoom: 14,
+                essential: true
+            });
+        };
+
+        // Function to show the route between two points using the Baato Directions API
+        const showRoute = (startLat, startLng, endLat, endLng) => {
+            const directionsUrl = `https://api.baato.io/api/v1/directions?start=${startLng},${startLat}&end=${endLng},${endLat}&key=bpk.zFs9QOONFAZgtBtlDG7U2-8bFRboO0Yn2hEqh8p867Ti`;
+
+            fetch(directionsUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const route = data.data[0]; // Taking the first route from the response
+
+                    // Decode the encoded polyline
+                    const routeCoordinates = decodePolyline(route.encodedPolyline);
+
+                    // Add the route line to the map
+                    map.addLayer({
+                        'id': 'route',
+                        'type': 'line',
+                        'source': {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'Feature',
+                                'geometry': {
+                                    'type': 'LineString',
+                                    'coordinates': routeCoordinates
+                                }
+                            }
+                        },
+                        'layout': {
+                            'line-join': 'round',
+                            'line-cap': 'round'
+                        },
+                        'paint': {
+                            'line-color': '#FF0000',
+                            'line-width': 5
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching route:', error));
+        };
+
+        // Decode polyline (from encoded polyline format to lat, lng)
+        function decodePolyline(encoded) {
+            let points = [];
+            let index = 0, len = encoded.length;
+            let lat = 0, lng = 0;
+
+            while (index < len) {
+                let shift = 0, result = 0;
+                let byte;
+                do {
+                    byte = encoded.charCodeAt(index++) - 63;
+                    result |= (byte & 0x1f) << shift;
+                    shift += 5;
+                } while (byte >= 0x20);
+                lat += ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+                shift = 0;
+                result = 0;
+                do {
+                    byte = encoded.charCodeAt(index++) - 63;
+                    result |= (byte & 0x1f) << shift;
+                    shift += 5;
+                } while (byte >= 0x20);
+                lng += ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+                points.push([lng / 1e5, lat / 1e5]);
+            }
+            return points;
+        }
+
+        // Wait for the map to load, then get the user's location
+        map.on('load', function() {
+            getLocation();
+        });
+
+        // Add event listener to the button to fetch the donor's location when clicked
+        document.getElementById('fetch-donor-btn').addEventListener('click', function() {
+            const donorData = fetchDonorData(); // Replace this with real API call to fetch data from Sanity
+
+            // Log donor location
+            console.log(`Donor Location: Latitude: ${donorData.latitude}, Longitude: ${donorData.longitude}`);
+
+            // Add the donor's marker to the map and center the map to the donor's location
+            addDonorLocation(donorData.latitude, donorData.longitude);
+        });
+
+        // Add event listener to show the route when clicked
+        document.getElementById('show-route-btn').addEventListener('click', function() {
+            if (userLocation && donorLocation) {
+                showRoute(userLocation.latitude, userLocation.longitude, donorLocation.latitude, donorLocation.longitude);
+            } else {
+                alert('Please fetch both the donor and user locations first.');
+            }
+        });
+    </script>
+</body>
+</html>

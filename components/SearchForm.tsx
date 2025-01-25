@@ -7,7 +7,7 @@ const SearchForm = ({query}:{query?:string}) => {
     
   return (
     <Form action="/" scroll={false} className="search-form">
-        <input type="text" defaultValue={query} className='search-input' name="query" placeholder="Search for startups" />
+        <input type="text" defaultValue={query} className='search-input' name="query" placeholder="Search for Books" />
 
         <div className="flex gap-2">
             {query && <SearchFormReset />}

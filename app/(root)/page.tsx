@@ -14,7 +14,7 @@ export default async function Home({searchParams}:{
     description: "this is a description",
     image: "https://via.placeholder.com/150",
     category: "Tech",
-    title : "Startup 1",
+    title : "Harry Potter",
   }]
   return (
     <>
